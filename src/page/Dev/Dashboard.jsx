@@ -9,10 +9,6 @@ export default function Dashboard() {
     <DevNav/>
     <br/><br/><br/><br/><br/><br/><br/>
     <Dashquery/>
-   </div>
-       
-      
-     
-    
+   </div> 
   )
 }

@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -38,15 +36,17 @@ export default function SignUp() {
   const navigate = useNavigate();
   const[userName, setUserName] = useState('');
   const[password, setPassword] = useState('');
+  const[errors, setErrors] = useState('');
 
   const saveUser = (e) => {
     e.preventDefault();
 
     const user = {userName, password};
+    const errors = validate({...user});
+    if(Object.keys(errors).length === 0){
     UserService.register(user)
     .then(response => {
       console.log("user registered", response.data);
-
       Swal.fire({
         icon: 'success',
         title: 'Added!',
@@ -58,18 +58,19 @@ export default function SignUp() {
     })
     .catch(error => {
       console.log("registration failed", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: `User already exist`,
+        showConfirmButton: false,
+        timer: 3000
+      });
     })
   }
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
-
+  else{
+    setErrors(errors);
+  }       
+  }
   return (<>
   <HomeNav/>
   <br/><br/>
@@ -91,8 +92,7 @@ export default function SignUp() {
             Sign up
           </Typography>
           <Box component="form" noValidate sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              
+            <Grid container spacing={2}> 
               <Grid item xs={12}>
                 <TextField
                   required
@@ -104,6 +104,7 @@ export default function SignUp() {
                   value={userName} 
                   onChange={(e) => setUserName(e.target.value)}
                 />
+                {errors.userName && <p style={{color:'red'}}>{errors.userName}</p>}
               </Grid>
               
               <Grid item xs={12}>
@@ -118,6 +119,7 @@ export default function SignUp() {
                   value={password} 
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                {errors.password && <p style={{color:'red'}}>{errors.password}</p>}
               </Grid>
             </Grid>
             <Button
@@ -142,4 +144,19 @@ export default function SignUp() {
     </ThemeProvider>
     </>
   );
+
+  function validate({userName, password, isBlocked}) {
+    let errors = {};
+    if (!userName) {
+      errors.userName = 'Username required';
+    }else if (!/\S+@\S+\.\S+/.test(userName)) {
+      errors.userName = 'Username is invalid';
+    }
+    if (!password) {
+      errors.password = 'Password is required';
+    } else if (password.length < 6) {
+      errors.password = 'Password needs to be 6 characters or more';
+    }  
+    return errors;
+  }
 }

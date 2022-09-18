@@ -1,6 +1,19 @@
 import React from 'react'
+import Swal from 'sweetalert2';
 
 export default function AdminNav() {
+
+  const LogOut = (e) => {
+    localStorage.clear();
+    Swal.fire({
+      icon: 'success',
+      title: 'Logged Out!',
+      text: `LogOut is successfull`,
+      showConfirmButton: false,
+      timer: 4000
+    });
+  }
+
   return (
     <div>
   
@@ -14,6 +27,7 @@ export default function AdminNav() {
         draggable="false"
         height="30"
     /></a>
+    <h3>DevCom</h3>
     <button
       class="navbar-toggler"
       type="button"
@@ -28,17 +42,18 @@ export default function AdminNav() {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item">
-          <a class="nav-link mx-2" href="#!"><i class="fas fa-plus-circle pe-2"></i>Post</a>
+          <a class="nav-link mx-2" href="/ViewDeveloper"><i class="fas fa-plus-circle pe-2"></i>View Developers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-2" href="#!"><i class="fas fa-bell pe-2"></i>Alerts</a>
+          <a class="nav-link mx-2" href="/DeleteQuery"><i class="fas fa-bell pe-2"></i>View Queries</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link mx-2" href="#!"><i class="fas fa-heart pe-2"></i>Trips</a>
+          <a class="nav-link mx-2" href="/DeleteResponse"><i class="fas fa-heart pe-2"></i>View Responses</a>
         </li>
-        <li class="nav-item ms-3">
-          <a class="btn btn-black btn-rounded" href="#!">Sign in</a>
+        <li className="nav-item ms-3">
+                <a className="btn btn-black btn-rounded" href="/" onClick={LogOut}>Log Out</a>
         </li>
+
       </ul>
     </div>
   </div>

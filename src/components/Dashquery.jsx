@@ -10,7 +10,6 @@ export default function Dashquery() {
   <div className="col-md-8">
     <BottomAppBar/>
     </div>
-  <div className="col-md-4"><Query/></div>
   
   
 

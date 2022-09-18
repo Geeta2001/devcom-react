@@ -27,18 +27,12 @@ export default function HomeNav() {
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto align-items-center">
-        <li class="nav-item">
-          <a class="nav-link mx-2" href="/even"><i class="fas fa-plus-circle pe-2"></i>Events</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link mx-2" href="#!"><i class="fas fa-bell pe-2"></i>Learn</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link mx-2" href="#!"><i class="fas fa-heart pe-2"></i>Blog</a>
-        </li>
-        <li class="nav-item ms-3">
+      <li class="nav-item ms-3">
+          <a class="btn btn-black btn-rounded" href="/register">Register </a>
+      </li>
+      <li class="nav-item ms-3">
           <a class="btn btn-black btn-rounded" href="/login">Login </a>
-        </li>
+      </li>
       </ul>
     </div>
   </div>

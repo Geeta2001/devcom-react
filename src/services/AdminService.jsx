@@ -9,4 +9,29 @@ import axios from "axios";
       return axios.get(`${url}/getdetails/${devId}`)
     }
 
-export default {getAll, get};
+    const blockUser = userId => {
+      return axios.put(`${url}/blockuser/${userId}`)
+    }
+
+    const unblockUser = userId => {
+      return axios.put(`${url}/unblockuser/${userId}`)
+    }
+
+    const deleteResponse = respId => {
+      return axios.delete(`${url}/deleteresponse/${respId}`)
+    }
+
+    const deleteFeed = feedId => {
+      return axios.delete(`${url}/deletefeed/${feedId}`)
+    }
+
+    const getAllUsers = () => {
+      return axios.get(`${url}/allusers`)
+    }
+
+    const removeResponse = respId => {
+      return axios.delete(`${url}/deleteresponse/${respId}`)
+    }
+
+
+export default {getAll, get, blockUser, unblockUser, deleteResponse, deleteFeed, getAllUsers, removeResponse};

@@ -6,6 +6,9 @@ const getAllFeeds = () => {
     return axios.get(`${url}/allfeeds`);  
 }
 
+const getAllResponses = () => {
+    return axios.get(`${url}/allresponses`);
+}
 const create = data => {
     return axios.post(`${url}/addfeed`, data);
 }
@@ -26,4 +29,4 @@ const addResponse = data => {
     return axios.post(`${url}/addresponse`,data)
 }
 
-export default {getAllFeeds, create, addDetails, getDevById, updateDetails, addResponse};
+export default {getAllFeeds, getAllResponses, create, addDetails, getDevById, updateDetails, addResponse};

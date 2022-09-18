@@ -10,9 +10,8 @@ export default function Home() {
       <br/><br/><br/><br/>
       
       <div className="image">
-            <img src="https://community.developer.bosch.com/html/@DC0534EDF5EF7A8E926CBD9195E83407/assets/devcommunity.jpg" />
-          </div>
-        
+          <img src="https://community.developer.bosch.com/html/@DC0534EDF5EF7A8E926CBD9195E83407/assets/devcommunity.jpg" />
+      </div>  
     </div>
     <Homefooter/>
     </>

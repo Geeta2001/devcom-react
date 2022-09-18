@@ -12,14 +12,27 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { blue } from '@mui/material/colors';
 
-
-const pages = ['Query', 'Games', 'Help'];
 const settings = ['Profile', 'AddDetails', 'Fund', 'Logout'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const LogOut = (e) => {
+    localStorage.clear();
+    Swal.fire({
+      icon: 'success',
+      title: 'Logged Out!',
+      text: `LogOut is successfull`,
+      showConfirmButton: false,
+      timer: 4000
+    });
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -88,21 +101,7 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {/* {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))} */}
-              <MenuItem>
-                  <Typography textAlign="center" href='/Addquery'>Query</Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography textAlign="center" href=''>Games</Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography textAlign="center" href=''>Help</Typography>
-                </MenuItem>
-                
+              
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -125,29 +124,47 @@ const ResponsiveAppBar = () => {
             DevCom
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+            
           </Box>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav ms-auto align-items-center">
-      <li className="nav-item">
-          <a className="nav-link mx-2" href="/even"><i className="fas fa-plus-circle pe-2"></i>Alumni</a>
-        </li>
-      <li className="nav-item">
-          <a className="nav-link mx-2" href="/even"><i className="fas fa-plus-circle pe-2"></i>Events</a>
-        </li>
-        <li className="nav-item ms-3">
-          <a className="btn btn-blue btn-rounded" href="/login">Login </a>
-        </li>
-      </ul>
-    </div>
+  
+<Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar sx={{ bgcolor: blue[500] }}>
+                  <AccountCircleIcon/>
+              </Avatar>
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+            <MenuItem >
+                    <Typography  textAlign="center" href='/dashboard' component="a">Dashboard</Typography>
+            </MenuItem>     
+            <MenuItem >
+                    <Typography  textAlign="center" href='/AddDetails' component="a">AddDetails</Typography>
+            </MenuItem>   
+            <MenuItem>
+                    <Typography textAlign="center" href='/updatedetails' component="a">Profile</Typography>
+            </MenuItem>
+            <MenuItem>
+                    <Typography textAlign="center" href='/' component="a" onClick={LogOut}>Logout</Typography>
+            </MenuItem>
+            </Menu>
+          </Box>
           
         </Toolbar>
       </Container>
